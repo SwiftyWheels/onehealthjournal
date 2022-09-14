@@ -19,10 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Create a new image from file
         switch ($mime) {
-            case 'image/jpeg':
-                $image = imagecreatefromjpeg($source);
-                imagejpeg($image, $destination, $quality);
-                break;
             case 'image/png':
                 $image = imagecreatefrompng($source);
                 imagepng($image, $destination, ($quality / 10));
@@ -40,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     $username = $_SESSION["username"];
-    $target_dir = "images/users/" . $_SESSION["username"] . "/";
+    $target_dir = "../resources/images/users/" . $_SESSION["username"] . "/";
 
     if (!file_exists($target_dir)) {
         mkdir($target_dir, 0777, true);
@@ -67,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         unlink($target_file);
     }
 
-    $displayPic = glob("images/users/" . $username . "/" . $username . "*");
+    $displayPic = glob("../resources/images/users/" . $username . "/" . $username . "*");
 
     if ($displayPic) {
         foreach ($displayPic as $pic) {
@@ -117,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                  and how it fits into the project (website or
                  web app. Be generous with your description.">
     <title>Upload</title>
-    <link rel="stylesheet" href="css/components/form-styles.css">
+    <link rel="stylesheet" href="../../resources/css/components/form-styles.css">
 </head>
 <body>
 <div class="form">
@@ -126,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="file" name="fileToUpload" id="fileToUpload">
         <input type="submit" value="Upload Image" name="submit">
     </form>
-    <a href="index.php">Home</a>
+    <a href="../index.php">Home</a>
 </div>
 </body>
 </html>

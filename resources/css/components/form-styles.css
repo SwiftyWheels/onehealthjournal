@@ -1,0 +1,88 @@
+@import url(../styles.css);
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    text-align: right;
+    border-radius: 5px;
+    background: white;
+}
+
+.form > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form > form * {
+    margin: 0.5em;
+}
+
+.form h3, a{
+    text-align: center;
+}
+
+.button {
+    align-self: center;
+    padding: 1.3em 3em;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: white;
+    background-color: var(--button-blue-color);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    scale: 75%;
+}
+
+.button:hover {
+    background-color: var(--light-green-color);
+    box-shadow: 0 5px 10px var(--light-green-color);
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.button:active {
+    transform: translateY(-1px);
+}
+
+.group {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.input {
+    font-size: 16px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #515151;
+    background: transparent;
+}
+
+.input:focus {
+    outline: none;
+}
+
+label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.input:focus ~ label, .input:valid ~ label {
+    top: -20px;
+    font-size: 14px;
+    color: var(--main-green-color);
+}

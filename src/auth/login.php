@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION["loggedIn"])) {
-    header("Location: index.php", true, 302);
+    header("Location: ../index.php", true, 302);
 }
 ?>
 <!DOCTYPE html>
@@ -18,26 +18,39 @@ if (isset($_SESSION["loggedIn"])) {
                  and how it fits into the project (website or
                  web app. Be generous with your description.">
     <title>Login</title>
-    <link rel="stylesheet" href="css/components/login/login-styles.css">
+    <link rel="stylesheet" href="../../resources/css/components/login/login-styles.css">
 </head>
 <body>
 <main>
     <div class="form form-login">
         <form action="authenticate.php" method="post">
+            <h3>Sign In</h3>
             <?php
             if (isset($_SESSION["errorMessages"])) {
                 echo "<p class='error'>" . $_SESSION["errorMessages"] . "</p>";
             }
             ?>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <input type="submit" value="Login">
+            <div class="group">
+                <input
+                        type="text"
+                        class="input"
+                        id="username"
+                        name="username"
+                        required>
+                <label for="username">Username</label>
+            </div>
+            <div class="group">
+                <input
+                        type="password"
+                        class="input"
+                        id="password"
+                        name="password"
+                        required>
+                <label for="password">Password</label>
+            </div>
+            <input class="button" type="submit" value="Login">
         </form>
-        <div>
-            <a href="register.php">Register Account</a>
-        </div>
+        <a class="" href="register.php">Register new account</a>
     </div>
 </main>
 </body>

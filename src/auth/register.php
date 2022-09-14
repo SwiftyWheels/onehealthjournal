@@ -9,7 +9,7 @@ if (isset($_SESSION["errorMessages"])) {
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (!isset($dbConn)) {
-        $dbConn = require_once("connect.php");
+        $dbConn = require_once("../db/connect.php");
     }
 
     $email = htmlspecialchars($_POST["email"]);
@@ -52,28 +52,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                  and how it fits into the project (website or
                  web app. Be generous with your description.">
     <title>Register Account</title>
-    <link rel="stylesheet" href="css/components/register/register-styles.css">
+    <link rel="stylesheet" href="../../resources/css/components/register/register-styles.css">
 </head>
 <body>
 <main>
     <div class="form form-register">
-        <?php
-        if (isset($errorCode) && $errorCode === 1062) {
-            echo "<p class='error'>Username or Email already exists!</p>";
-        }
-        if (isset($result)) {
-            echo "<p class='success'>Successfully added account! </p>";
-        }
-        ?>
         <form action="" method="post">
-            <label>Email: <input type="email" name="email" required></label>
-            <label>Username: <input type="text" name="username" required></label>
-            <label>Password: <input type="password" name="password" required></label>
-            <input type="submit" value="Register">
+            <h3>Register New Account</h3>
+            <?php
+            if (isset($errorCode) && $errorCode === 1062) {
+                echo "<p class='error'>Username or Email already exists!</p>";
+            }
+            if (isset($result)) {
+                echo "<p class='success'>Successfully added account! </p>";
+            }
+            ?>
+            <div class="group">
+                <input type="email" class="input" id="email" name="email" required>
+                <label for="email">Email</label>
+            </div>
+            <div class="group">
+                <input type="text" class="input" id="username" name="username" required>
+                <label for="username">Username</label>
+            </div>
+            <div class="group">
+                <input type="password" class="input" id="password" name="password" required>
+                <label for="password">Password</label>
+            </div>
+            <input class="button" type="submit" value="Register">
         </form>
-        <div>
-            <a href="login.php">Login</a>
-        </div>
+        <a class="" href="login.php">Sign in to existing account</a>
     </div>
 </main>
 </body>

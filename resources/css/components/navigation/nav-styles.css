@@ -1,0 +1,38 @@
+@import url(../../styles.css);
+
+nav {
+    background: var(--main-green-color);
+    padding: 0.25em;
+    text-align: right;
+    position: sticky;
+    text-decoration: none;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav a{
+    color: white;
+}
+
+nav a:hover{
+    color: var(--button-blue-color);
+}
+
+nav img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+}
+
+nav .nav-logo ul, .nav-links ul{
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    justify-content: space-between;
+}
+
+nav .nav-logo ul li, .nav-links ul li{
+    color: white;
+    padding: 0.25em;
+}

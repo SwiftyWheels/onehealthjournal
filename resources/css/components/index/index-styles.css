@@ -1,0 +1,6 @@
+/* CSS Reset */
+@import url(../../styles.css);
+
+main h1{
+    text-align: center;
+}

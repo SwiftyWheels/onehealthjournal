@@ -1,4 +1,5 @@
-/config.php
-/connect.php
-/images/users/patrick/
 /.idea/
+/src/config.php
+/resources/images/users/patrick/
+/src/connect.php
+/src/db/

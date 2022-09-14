@@ -1,0 +1,50 @@
+@import url(https://cdn.skypack.dev/sanitize.css);
+
+:root {
+    --ui-nav-grey: #1c1c1c;
+    --ui-grey: #2e2e2e;
+    --ui-black: #0e0e0e;
+    --font-on-ui-black: #ffffff;
+    --font-on-ui-grey: #dedede;
+    --link-text-color-blue: #065fd4;
+    --link-text-color-blue-hover: #0770fa;
+    --link-text-color-purple: rgba(117, 117, 123, 0);
+    --link-text-color-purple-hover: #9a5dfc;
+
+    /* Color Palette*/
+    --main-green-color: #44BB49;
+    --light-green-color: #489970;
+    --font-color-on-white: #1C4D34;
+    --button-blue-color: #3f60c1;
+
+    /* Font Size */
+    --font-size: calc(15px + 0.390625vw);
+}
+
+html {
+    scroll-behavior: smooth;
+    /*!* This prevents horizontal scrollbars on slide in animations *!*/
+    overflow-x: hidden;
+    font-size: var(--font-size);
+}
+
+body {
+    font-family: Verdana, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: var(--button-blue-color);
+}
+
+a:hover {
+    color: var(--light-green-color);
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}

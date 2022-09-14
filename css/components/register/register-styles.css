@@ -1,9 +1,0 @@
-@import url(../../global-styles.css);
-@import url(../form-styles.css);
-
-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 25vh 25vw;
-}

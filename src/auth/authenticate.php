@@ -4,7 +4,7 @@ session_start();
 // Call this only if the server was sent a post request
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!isset($dbConn)) {
-        $dbConn = require_once("connect.php");
+        $dbConn = require_once("../db/connect.php");
     }
 
     $username = htmlspecialchars($_POST["username"]);
@@ -33,30 +33,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errorCode = $exception->errorInfo[1];
         echo $errorCode;
     }
-}
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 minimum-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="author" content="Patrick Hogg">
-    <meta
-            name="description"
-            content="describe what is the purpose of the current page
-                 and how it fits into the project (website or
-                 web app. Be generous with your description.">
-    <title>Authenticate</title>
-</head>
-<body>
-<?php
-if (isset($_SESSION["loggedIn"])) {
-    echo "<p>Successfully logged in!</p>";
-    echo "<p>Redirecting...</p>";
-    header("refresh:3;url=index.php", true, 302);
+    $sql = "SELECT DISTINCT weight_amount, weight_date
+            FROM weight
+            LEFT JOIN users_weight uw
+            ON weight.id = uw.weight_id
+            WHERE users_id = :id
+            ORDER BY weight.id DESC LIMIT 1";
+
+    $params = [
+        ':id' => $_SESSION["id"],
+    ];
+
+    $statement = $dbConn->prepare($sql);
+
+    try {
+        $result = $statement->execute($params);
+    } catch (PDOException $exception) {
+        echo $exception;
+    }
+
+    $_SESSION["latestWeight"] = $statement->fetch();
 }
-?>
-</body>
-</html>
+if (isset($_SESSION["loggedIn"])) {
+    header("Location: ../index.php", true, 302);
+}
