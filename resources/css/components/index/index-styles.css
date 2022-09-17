@@ -1,6 +1,15 @@
 /* CSS Reset */
 @import url(../../styles.css);
+@import url(../form-styles.css);
 
 main h1{
     text-align: center;
+}
+
+.form{
+    border: 1px solid #d9d9d9;
+    background: #ffffff;
+    box-shadow:  25px 25px 30px #d9d9d9,
+    -5px -5px 10px #ffffff;
+    margin: 1em;
 }

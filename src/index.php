@@ -25,7 +25,8 @@ if (isset($dbConn)) {
             FROM weight
             LEFT JOIN users_weight uw
             ON weight.id = uw.weight_id
-            WHERE users_id = :id";
+            WHERE users_id = :id
+            ORDER BY weight_date DESC";
 
     $params = [
         ':id' => $_SESSION["id"],
@@ -39,9 +40,14 @@ if (isset($dbConn)) {
         echo $exception;
     }
 }
-
-
 ?>
+<!--
+TODO:
+    Add one rep max,
+    add weight to workout table,
+    add category to workout table,
+    add 30 day challenge
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,6 +62,7 @@ if (isset($dbConn)) {
     <link rel="stylesheet" href="../resources/css/components/navigation/nav-styles.css">
     <link rel="stylesheet" href="../resources/css/components/table-styles.css">
     <link rel="stylesheet" href="../resources/css/components/index/index-styles.css">
+    <script src="../resources/js/scripts.js"></script>
 </head>
 <body>
 <header>
@@ -68,9 +75,6 @@ if (isset($dbConn)) {
         </div>
         <div class="nav-links">
             <ul>
-                <li>
-                    <a href="health/weight.php">Weigh-In</a>
-                </li>
                 <li>
                     <a href="account/upload.php">Upload File</a>
                 </li>
@@ -89,38 +93,72 @@ if (isset($dbConn)) {
     </nav>
 </header>
 <main>
-    <?php
-    if (isset($_SESSION["username"])) {
-        echo "<h1>Welcome, " . ucfirst($_SESSION["username"]) . "!</h1>";
-        if (isset($_SESSION["latestWeight"])) {
-            echo "<p>Latest weigh-in: " . $_SESSION["latestWeight"]["weight_amount"] . "lbs on: " .
-                $_SESSION["latestWeight"]["weight_date"] . " </p>";
-        }
-    }
-    ?>
-    <div class="table">
-        <h3>Weigh-Ins</h3>
-        <?php
-        echo "
-            <table>
-            <thead>
-            <tr>
-                <th>Weight Amount</th>
-                <th>Date</th>
-            </tr>
-            </thead>
-            <tbody>
-            ";
-        if (isset($result) && isset($statement)) {
-            while ($weight = $statement->fetch()) {
-                echo "<tr>";
-                echo "<td>$weight[weight_amount]</td>";
-                echo "<td>$weight[weight_date]</td>";
-                echo "<tr>";
-            }
-        }
-        echo "</table>";
-        ?>
+    <header>
+        <div class="container-nav">
+            <ul>
+                <li>
+                    <button class="button" id="workoutButton">Workouts</button>
+                </li>
+                <li>
+                    <button class="button" id="caloriesButton">Calories</button>
+                </li>
+                <li>
+                    <button class="button" id="weightButton">Weigh-Ins</button>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="container-components">
+        <div class="">
+            <div class="container-workout hidden" id="containerWorkout">
+                <p>Workout Container</p>
+            </div>
+            <div class="container-calories hidden" id="containerCalories">
+                <p>Calories Container</p>
+            </div>
+            <div class="container-weight" id="containerWeight">
+                <div class="form">
+                    <h3>Log Weight</h3>
+                    <form action="health/weight.php" method="post">
+                        <div class="group">
+                            <input type="number" class="input" id="weight" name="weight" required>
+                            <label for="weight">Weight(lbs):</label>
+                        </div>
+                        <div class="group">
+                            <?php
+                            echo "<input type='date' class='input' name='date' required>";
+                            echo "<label>Date:</label>";
+                            ?>
+                        </div>
+                        <input class='button' type="submit" value="Submit">
+                    </form>
+                </div>
+                <div class="table">
+                    <h3>Weigh-Ins</h3>
+                    <?php
+                    echo "
+                            <table>
+                            <thead>
+                                <tr>
+                                    <th>Weight Amount</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            ";
+                    if (isset($result) && isset($statement)) {
+                        while ($weight = $statement->fetch()) {
+                            echo "<tr>";
+                            echo "<td>$weight[weight_amount]</td>";
+                            echo "<td>$weight[weight_date]</td>";
+                            echo "<tr>";
+                        }
+                    }
+                    echo "</table>";
+                    ?>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 

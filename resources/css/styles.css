@@ -48,3 +48,7 @@ a:hover {
 .success {
     color: green;
 }
+
+.hidden{
+    display: none;
+}

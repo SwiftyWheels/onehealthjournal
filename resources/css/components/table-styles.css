@@ -9,18 +9,22 @@ main{
     text-align: center;
 }
 
+table{
+    width: 100%;
+}
+
 table *{
     text-align: center;
     padding: 0.5em;
 }
 
 table th {
-    background: var(--main-green-color);
+    background: var(--ui-nav-grey);
     color: white;
 }
 
 table th, td{
-    border: 1px solid var(--main-green-color);
+    border: 1px solid var(--ui-nav-grey);
 }
 
 table tr:hover{

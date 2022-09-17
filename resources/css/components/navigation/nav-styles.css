@@ -1,10 +1,9 @@
 @import url(../../styles.css);
 
-nav {
-    background: var(--main-green-color);
+nav, .container-nav {
+    background: var(--ui-nav-grey);
     padding: 0.25em;
     text-align: right;
-    position: sticky;
     text-decoration: none;
     list-style: none;
     display: flex;
@@ -16,7 +15,7 @@ nav a{
 }
 
 nav a:hover{
-    color: var(--button-blue-color);
+    color: #78DE50;
 }
 
 nav img{
@@ -25,7 +24,7 @@ nav img{
     border-radius: 50px;
 }
 
-nav .nav-logo ul, .nav-links ul{
+nav .nav-logo ul, .nav-links ul, .container-nav ul{
     display: flex;
     flex-direction: row;
     margin: 0;
@@ -35,4 +34,16 @@ nav .nav-logo ul, .nav-links ul{
 nav .nav-logo ul li, .nav-links ul li{
     color: white;
     padding: 0.25em;
+}
+
+.container-nav {
+    margin: 1em 0;
+    border-radius: 5px;
+}
+.container-nav ul{
+    padding: 0;
+}
+
+.container-nav li{
+    list-style: none;
 }
