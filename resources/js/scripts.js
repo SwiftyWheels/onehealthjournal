@@ -2,28 +2,40 @@
 // isn't written properly. Helps with debugging.
 // This can also be placed inside a function to make the function strict mode
 "use strict";
+import * as toggleHelper from './utilities/toggleHelpers.js';
 
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
     setAllDateInputsToCurrentDate();
-    addTogglesToContainerButtons();
+    addListenersToButtons();
 }
 
-function addTogglesToContainerButtons() {
+function addListenersToButtons() {
     // Get all the buttons
     let workoutButton = document.getElementById("workoutButton");
     let caloriesButton = document.getElementById("caloriesButton");
     let weightButton = document.getElementById("weightButton");
+
+    let workoutButtonNav = document.getElementById("workoutButtonNav");
+    let caloriesButtonNav = document.getElementById("caloriesButtonNav");
+    let weightButtonNav = document.getElementById("weightButtonNav");
 
     // Get all the containers
     let workoutContainer = document.getElementById("containerWorkout");
     let caloriesContainer = document.getElementById("containerCalories");
     let weightContainer = document.getElementById("containerWeight");
 
+    // Nav containers/buttons
+    let navButtonsContainer = document.querySelector(".container-nav" +
+        " .nav-dropdown-container");
+
+    // Date Input
+    let dateInput = document.querySelector("input[type='date']");
+
     // Add appropriate event listeners
     workoutButton.addEventListener("click", function () {
-        toggleHiddenOnOtherElements(workoutContainer,
+        toggleHelper.toggleHiddenOnOtherElements(workoutContainer,
             [
                 caloriesContainer,
                 weightContainer
@@ -31,7 +43,7 @@ function addTogglesToContainerButtons() {
     });
 
     caloriesButton.addEventListener("click", function () {
-        toggleHiddenOnOtherElements(caloriesContainer,
+        toggleHelper.toggleHiddenOnOtherElements(caloriesContainer,
             [
                 workoutContainer,
                 weightContainer
@@ -39,93 +51,49 @@ function addTogglesToContainerButtons() {
     });
 
     weightButton.addEventListener("click", function () {
-        toggleHiddenOnOtherElements(weightContainer,
+        toggleHelper.toggleHiddenOnOtherElements(weightContainer,
             [
                 workoutContainer,
                 caloriesContainer
             ], "hidden")
     });
 
-}
+    // Add appropriate event listeners
+    workoutButtonNav.addEventListener("click", function () {
+        toggleHelper.toggleHiddenOnOtherElements(workoutContainer,
+            [
+                caloriesContainer,
+                weightContainer
+            ], "hidden")
+    });
 
-/**
- * Toggles the hidden class on the specified element and adds the hidden
- * class to the other elements given. This is useful for wanting to display
- * one element and hide other elements.
- * @param element the element to toggle the hidden class on.
- * @param elements the elements to add the hidden class to.
- */
-function toggleHiddenOnOtherElements(element, elements) {
-    toggleClassOnElement(element, "hidden");
-    addClassToElements(elements, "hidden");
-}
+    caloriesButtonNav.addEventListener("click", function () {
+        toggleHelper.toggleHiddenOnOtherElements(caloriesContainer,
+            [
+                workoutContainer,
+                weightContainer
+            ], "hidden")
+    });
 
-/**
- * Toggles a class on all elements provided.
- * @param elements the elements to toggle the class on.
- * @param classToToggle the class to toggle.
- */
-function toggleClassOnElements(elements, classToToggle) {
-    for (const element of elements) {
-        toggleClassOnElement(element, classToToggle);
-    }
-}
+    weightButtonNav.addEventListener("click", function () {
+        toggleHelper.toggleHiddenOnOtherElements(weightContainer,
+            [
+                workoutContainer,
+                caloriesContainer
+            ], "hidden")
+    });
 
-/**
- * Toggles a css class on a specified element.
- * @param element the element to toggle the class on
- * @param classToToggle the class to toggle on the element
- */
-function toggleClassOnElement(element, classToToggle) {
-    if (!element.classList.contains(classToToggle)) {
-        element.classList.add(classToToggle);
-    } else {
-        element.classList.remove(classToToggle);
-    }
-}
+    navButtonsContainer.addEventListener("click", function () {
+        let navDropDownBars = navButtonsContainer.querySelectorAll(".nav-dropdown-bar");
+        let navDropDownLinks = navButtonsContainer.querySelector(".nav-dropdown-links");
+        toggleHelper.toggleClassOnElements(navDropDownBars, "toggle-on");
+        toggleHelper.toggleClassOnElement(navDropDownLinks, "hidden");
+    })
 
-/**
- * Adds a class from to elements provided.
- * @param elements the elements to add the class to.
- * @param classToAdd the class to add from the element.
- */
-function addClassToElements(elements, classToAdd) {
-    for (const element of elements) {
-        addClassToElement(element, classToAdd);
-    }
-}
+    dateInput.addEventListener("keydown", function (e) {
+        e.preventDefault();
+    })
 
-/**
- * Adds a class to an element.
- * @param element element to add the class to.
- * @param classToAdd the class to add to the element.
- */
-function addClassToElement(element, classToAdd) {
-    if (!element.classList.contains(classToAdd)) {
-        element.classList.add(classToAdd);
-    }
-}
-
-/**
- * Removes a class from all elements provided.
- * @param elements the elements to remove the class from.
- * @param classToRemove the class to remove from the element.
- */
-function removeClassFromElements(elements, classToRemove) {
-    for (const element of elements) {
-        removeClassFromElement(element, classToRemove);
-    }
-}
-
-/**
- * Removes a class from an element.
- * @param element element to remove the class from.
- * @param classToRemove the class to remove from the element.
- */
-function removeClassFromElement(element, classToRemove) {
-    if (element.classList.contains(classToRemove)) {
-        element.classList.remove(classToRemove);
-    }
 }
 
 /**
@@ -149,6 +117,10 @@ function setAllDateInputsToCurrentDate() {
     // Add 0 to the month as it needs to conform to the mm format
     if (month < 10) {
         month = "0" + month;
+    }
+    
+    if (day < 10){
+        day = "0" + day;
     }
 
     // Set the date in a "yyyy-mm-dd" format

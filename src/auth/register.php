@@ -53,6 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                  web app. Be generous with your description.">
     <title>Register Account</title>
     <link rel="stylesheet" href="../../resources/css/components/register/register-styles.css">
+    <link rel="stylesheet" href="../../resources/css/components/form/form-styles.css">
 </head>
 <body>
 <main>

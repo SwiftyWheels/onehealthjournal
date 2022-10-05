@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                  and how it fits into the project (website or
                  web app. Be generous with your description.">
     <title>Upload</title>
-    <link rel="stylesheet" href="../../resources/css/components/form-styles.css">
+    <link rel="stylesheet" href="../../resources/css/components/form/form-styles.css">
 </head>
 <body>
 <div class="form">

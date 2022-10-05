@@ -17,7 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $dbConn = require_once("../db/connect.php");
     }
 
-    $weight = $_POST["weight"];
+    $weight = filter_var($_POST["weight"], FILTER_VALIDATE_FLOAT);
+    $weight = number_format($weight, 2);
     $date = $_POST["date"];
 
     $sql = "INSERT INTO weight (weight_amount, weight_date)

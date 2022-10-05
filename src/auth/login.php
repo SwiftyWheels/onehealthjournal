@@ -19,6 +19,7 @@ if (isset($_SESSION["loggedIn"])) {
                  web app. Be generous with your description.">
     <title>Login</title>
     <link rel="stylesheet" href="../../resources/css/components/login/login-styles.css">
+    <link rel="stylesheet" href="../../resources/css/components/form/form-styles.css">
 </head>
 <body>
 <main>

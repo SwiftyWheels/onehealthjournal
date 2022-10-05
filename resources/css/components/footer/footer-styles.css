@@ -1,0 +1,7 @@
+footer{
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+    background: var(--ui-nav-grey);
+    color: white;
+}

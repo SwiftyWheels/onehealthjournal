@@ -1,5 +1,5 @@
 /* CSS Reset */
-@import url(../styles.css);
+@import url(../../styles.css);
 
 
 main{
@@ -38,6 +38,6 @@ table tr:hover{
     border-radius: 5px;
     border: 1px solid #d9d9d9;
     background: #ffffff;
-    box-shadow:  25px 25px 30px #d9d9d9,
-    -25px -25px 30px #ffffff;
+    box-shadow:  5px 5px 30px #d9d9d9,
+    -5px -5px 10px #ffffff;
 }

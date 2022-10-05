@@ -1,15 +1,258 @@
 /* CSS Reset */
 @import url(../../styles.css);
-@import url(../form-styles.css);
 
-main h1{
+main h1 {
     text-align: center;
 }
 
-.form{
-    border: 1px solid #d9d9d9;
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content 1fr max-content;
+    grid-template-areas:
+            "nav"
+            "main"
+            "footer";
+}
+
+header{
+    grid-area: nav;
+}
+
+main{
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-areas:
+            ". buttonNav ."
+            ". containerComponents .";
+    justify-items: center;
+}
+
+footer{
+    grid-area: footer;
+}
+
+.form {
     background: #ffffff;
-    box-shadow:  25px 25px 30px #d9d9d9,
+    box-shadow: 5px 5px 30px #d9d9d9,
     -5px -5px 10px #ffffff;
     margin: 1em;
+    padding: 0;
+}
+
+.container-components {
+    grid-area: containerComponents;
+    width: 75vw;
+}
+
+.container-nav{
+    grid-area: buttonNav;
+}
+
+.container-nav .nav-dropdown-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.container-nav .nav-dropdown-links ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-nav .nav-dropdown-links ul li button {
+    width: 100%;
+}
+
+/* Weight Styles  */
+
+.container-weight {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "content";
+    gap: 1em;
+}
+
+.container-weight .container-content {
+    display: grid;
+    grid-area: content;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+            "header header form"
+            "items items items";
+}
+
+.container-weight-header{
+    grid-area: header;
+    margin: 1em;
+}
+
+.form{
+    grid-area: form;
+}
+
+.container-weight-header-item-header p{
+    font-weight: bold;
+}
+
+.container-weight-header-items{
+    grid-area: header;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+            ". ."
+            ". ."
+            "progress progress";
+    gap: 1em;
+}
+
+.container-weight-header-item{
+    border-radius: 5px;
+    box-shadow: 5px 5px 30px #d9d9d9,
+    -5px -5px 10px #ffffff;
+}
+
+.container-weight-header-item.progress-bar{
+    grid-area: progress;
+    padding-bottom: 1em;
+}
+
+.progress-bar .bar-container {
+    position: relative;
+    margin: auto 1em;
+    background: #999;
+    border-radius: 5px;
+}
+
+.progress-bar .bar-container span{
+    position: relative;
+    right: 0;
+    left: 0;
+    color: white;
+    z-index: 2;
+}
+
+.progress-bar .bar{
+    position: absolute;
+    border-radius: 5px;
+    top: 0;
+    height: 1.5em;
+    border: 1px solid green;
+    background: green;
+    z-index: 1;
+}
+
+.container-weight-items{
+    grid-area: items;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    margin: 1em;
+}
+
+.weight-item{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: max-content;
+    grid-template-areas:
+            "date date"
+            "weight weight"
+            "goal lost";
+    box-shadow: 5px 5px 30px #d9d9d9;
+    border-radius: 5px;
+    gap: 1em;
+    padding: 1em;
+}
+
+.weight-item *{
+    margin: 0;
+}
+
+.weight-item-date{
+    grid-area: date;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.weight-amount{
+    grid-area: weight;
+}
+
+.weight-goal{
+    grid-area: goal;
+    text-align: right;
+}
+
+.weight-lost{
+    grid-area: lost;
+    text-align: left;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 750px) {
+    .container-weight-items{
+        grid-template-columns: 1fr;
+    }
+
+    .form{
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .nav-buttons {
+        display: none;
+    }
+
+    .container-weight .container-content {
+        display: grid;
+        grid-area: content;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+            "header header form"
+            "items items items";
+    }
+
+}
+
+@media only screen and (max-width: 1050px) {
+    .container-weight .container-content {
+        display: grid;
+        grid-area: content;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "form"
+            "header"
+            "items";
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 1250px) {
+    .container-weight-header-items{
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+                ". ."
+                ". ."
+                "progress progress";
+    }
+
+    .container-weight-header-item.progress-bar{
+        padding-bottom: 1em;
+    }
+
+    .weight-item{
+        grid-template-rows: 2em 1.5em 1.5em 1.5em;
+        grid-template-areas:
+            "date date"
+            "weight weight"
+            "goal goal"
+            "lost lost";
+    }
+
+    .weight-goal, .weight-lost{
+        text-align: center;
+    }
 }
