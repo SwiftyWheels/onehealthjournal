@@ -46,7 +46,6 @@ TODO:
     Add one rep max,
     add category to workout table,
     add 30 day challenge,
-    add weight goal
 -->
 <!DOCTYPE html>
 <html lang="en">
